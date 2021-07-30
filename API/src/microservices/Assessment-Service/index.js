@@ -26,10 +26,7 @@ exports.submit = async (assessment) => {
   }).save();
 };
 
-exports.getList = () => {
+exports.getList = () =>
   // use the bookshelf model Assessments from API/src/microservices/Database to fetch
   // the assessment data from the PostgreSQL database
-  const assessments = [];
-
-  return assessments;
-};
+  Assessments.fetchAll().then((resData) => resData.serialize());

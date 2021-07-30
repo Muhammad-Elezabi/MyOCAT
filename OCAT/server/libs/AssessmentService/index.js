@@ -1,5 +1,6 @@
 const { client, config } = require(`../../utils`);
 const { InternalServerError } = require(`restify-errors`);
+const { AssessmentService } = require(`..`);
 
 exports.submit = (assessment) => new Promise((resolve, reject) => {
   // this function sends a request to the API
@@ -22,7 +23,7 @@ exports.submit = (assessment) => new Promise((resolve, reject) => {
 exports.getList = () => new Promise((resolve, reject) => {
   // this function sends a request to the API
   // finish the logic to handle the response when returned from the API
-  client.METHOD(`/some-url`,
+  client.get(`/assessment/list`,
     (err, req, res, body) => {
       if (err) {
         return reject(err);
@@ -32,6 +33,6 @@ exports.getList = () => new Promise((resolve, reject) => {
         return reject(new InternalServerError(`Request Error`));
       }
 
-      resolve(body.data);
+      resolve(body.data.assessments);
     });
 });

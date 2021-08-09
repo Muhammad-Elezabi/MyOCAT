@@ -56,20 +56,3 @@ export const NewAssessment = () => {
     <Button variant="primary" type="submit">Submit</Button>
   </Form>;
 };
-
-// <div>
-//   <p>Does the Cat have previous contact with the Cat Judicial System?</p>
-//   <form onSubmit={handleSubmit(onSubmit)}>
-//     <input type="radio" id="contact" name="contact" value="Yes" ref={register} />
-//     <label htmlFor="contact">Yes</label>
-//     <input type="radio" id="contact2" name="contact" value="No" ref={register} />
-//     <label htmlFor="contact2">No</label>
-//     <p>Does the Cat have any previous altercations with other Cats?</p>
-//     <input type="radio" id="altercationsFew" name="altercations" value="Yes" ref={register} />
-//     <label htmlFor="contact">Yes</label>
-//     <input type="radio" id="contact2" name="contact2" value="No" ref={register} />
-//     <label htmlFor="contact2">No</label>
-//   </form>
-// </div>
-
-// const { handleSubmit, register } = useForm();

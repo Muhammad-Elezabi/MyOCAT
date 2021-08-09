@@ -1,30 +1,37 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { Table } from 'react-bootstrap';
-import { useTable } from 'react-table';
+import { useFilters, useTable } from 'react-table';
 import { AssessmentService } from '../../services/AssessmentService';
+import { ColumnFilter } from './ColumnFilter';
 
 export const COLUMNS = [
   {
+    Filter: ColumnFilter,
     Header: `ID`,
     accessor: `id`,
   },
   {
+    Filter: ColumnFilter,
     Header: `Cat Name`,
     accessor: `cat_name`,
   },
   {
+    Filter: ColumnFilter,
     Header: `Cat Date of Birth`,
     accessor: `cat_date_of_birth`,
   },
   {
+    Filter: ColumnFilter,
     Header: `Assessment Date`,
     accessor: `created_at`,
   },
   {
+    Filter: ColumnFilter,
     Header: `Score`,
     accessor: `score`,
   },
   {
+    Filter: ColumnFilter,
     Header: `Risk Level`,
     accessor: `risk_level`,
   },
@@ -51,7 +58,7 @@ export const AssessmentList = () => {
   } = useTable({
     columns,
     data: assessments,
-  });
+  }, useFilters);
 
   return (
     <>
@@ -60,7 +67,9 @@ export const AssessmentList = () => {
           {headerGroups.map(headerGroup =>
             <tr {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map(column =>
-                <th {...column.getHeaderProps()}>{column.render(`Header`)}</th>)}
+                <th {...column.getHeaderProps(column.getSortByToggleProps())}>{column.render(`Header`)}
+                  <div>{column.canFilter ? column.render(`Filter`) : null}</div>
+                </th>)}
             </tr>)}
         </thead>
         <tbody {...getTableBodyProps()}>

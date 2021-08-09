@@ -28,3 +28,9 @@ const Assessments = bookshelf.Model.extend({
 });
 
 exports.Assessments = Assessments;
+
+const Credentials = bookshelf.Model.extend({
+  tableName: `credentialstable`,
+});
+
+exports.Credentials = Credentials;

@@ -8,7 +8,19 @@ import { Login } from './pages/Login/Login.jsx';
 import { Register } from './pages/Login/Register.jsx';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-export const App = () => <SiteWrapper>
+function getToken() {
+}
+
+export const App = () => {
+  const token = getToken();
+  console.log(!token);
+
+  if(!token) {
+    return <Login/>
+  }
+
+  return (
+<SiteWrapper>
   <BrowserRouter>
     <Route path="/" component={DashboardBulletin} />
     <Route path="/assessment/new" component={NewAssessment} />
@@ -16,4 +28,6 @@ export const App = () => <SiteWrapper>
     <Route path="/login" component={Login} />
     <Route path="/register" component={Register} />
   </BrowserRouter>
-</SiteWrapper>;
+</SiteWrapper>
+  );
+}

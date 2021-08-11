@@ -9,7 +9,6 @@ export const Register = () =>
   const { errors, handleSubmit, register } = useForm();
 
   const onSubmit = async (data) => {
-    console.log(data);
     await RegisterService.submit(data);
   };
   return (

@@ -1,16 +1,36 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import * as ReactDOM from 'react-dom';
 import { Button, Form } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { LoginService } from '../../services/LoginService';
+import { App } from '../../App';
+import GlobalToken from '../../GlobalToken';
 
-export const Login = () =>
+export const Login = ({ setToken }) =>
 {
   const { errors, handleSubmit, register } = useForm();
 
   const onSubmit = async (data) => {
     const token = await LoginService.submit(data);
-    return token;
+    class TokenCarrier extends React.Component {
+      constructor(props) {
+        super(props);
+
+        this.state = {
+          Token: token,
+        };
+      }
+
+      render() {
+        return (
+          <GlobalToken.Provider value={this.state.Token}>
+            <Home />
+          </GlobalToken.Provider>
+        );
+      }
+    }
+    setToken(token);
+    ReactDOM.render(<App />, document.getElementById(`app-root`));
   };
 
   return (

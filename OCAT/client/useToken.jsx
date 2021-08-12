@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 export const useToken = () => {
   const getToken = () => {
     const tokenString = sessionStorage.getItem(`token`);
+    console.log(tokenString);
     const userToken = JSON.parse(tokenString);
     return userToken?.token;
   };

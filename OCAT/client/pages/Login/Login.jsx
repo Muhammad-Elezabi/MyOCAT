@@ -4,38 +4,18 @@ import { Button, Form } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { LoginService } from '../../services/LoginService';
 import { App } from '../../App';
-import GlobalToken from '../../GlobalToken';
 
 export const Login = ({ setToken }) =>
 {
   const { errors, handleSubmit, register } = useForm();
-
   const onSubmit = async (data) => {
     const token = await LoginService.submit(data);
-    class TokenCarrier extends React.Component {
-      constructor(props) {
-        super(props);
-
-        this.state = {
-          Token: token,
-        };
-      }
-
-      render() {
-        return (
-          <GlobalToken.Provider value={this.state.Token}>
-            <Home />
-          </GlobalToken.Provider>
-        );
-      }
-    }
     setToken(token);
-    ReactDOM.render(<App />, document.getElementById(`app-root`));
   };
 
   return (
     <div>
-      <h1>Login</h1>
+      <h1>Please Login</h1>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Form.Group>
           <Form.Label>Email:</Form.Label>
@@ -52,3 +32,22 @@ export const Login = ({ setToken }) =>
     </div>
   );
 };
+
+// class TokenCarrier extends React.Component {
+//   constructor(props) {
+//     super(props);
+
+//     this.state = {
+//       Token: token,
+//     };
+//   }
+
+//   render() {
+//     return (
+//       <GlobalToken.Provider value={this.state.Token}>
+//         <Home />
+//       </GlobalToken.Provider>
+//     );
+//   }
+// }
+// sessionStorage.setItem(`token`, token);

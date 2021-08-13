@@ -47,4 +47,26 @@ module.exports = server => {
       }
     },
   );
+
+  server.post(
+    `${BASE_URL}/delete`,
+    async (req, res, next) => {
+      try {
+        const { id } = req.params;
+        // verify that your data is making it here to the API by using console.log(assessment);
+        // call the AssessmentService.submit function from the API/src/microservices/Assessment/ and
+        // supply the correct parameters
+        AssessmentService.deleteRow(id);
+
+        ResponseHandler(
+          res,
+          `Submitted assessment`,
+          {},
+          next,
+        );
+      } catch (err) {
+        next(err);
+      }
+    },
+  );
 };

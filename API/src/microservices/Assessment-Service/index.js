@@ -29,4 +29,13 @@ exports.submit = async (assessment) => {
 exports.getList = () =>
   // use the bookshelf model Assessments from API/src/microservices/Database to fetch
   // the assessment data from the PostgreSQL database
-  Assessments.fetchAll().then((resData) => resData.serialize());
+  Assessments.where({ deleted_at: null }).fetchAll().then((resData) => resData.serialize());
+
+exports.deleteRow = (ID) => {
+  // use the bookshelf model Assessments from API/src/microservices/Database to fetch
+  // the assessment data from the PostgreSQL database
+  console.log(ID);
+  const deleteTime = new Date();
+  Assessments.where({ id: ID })
+    .save({ deleted_at: new Date() }, { patch: true });
+};

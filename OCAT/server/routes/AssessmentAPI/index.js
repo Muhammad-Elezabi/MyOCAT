@@ -25,5 +25,16 @@ router.get(`/list`, async (req, res, next) => {
   }
 });
 
+router.post(`/delete`, async (req, res, next) => {
+  try {
+    const { id } = req.body;
+    console.log(id);
+    // call the submit function from the server/libs/AssessmentService
+    await AssessmentService.deleteRow(id);
+  } catch (error) {
+    next(error);
+  }
+});
+
 exports.router = router;
 exports.path = `/api/assessment`;
